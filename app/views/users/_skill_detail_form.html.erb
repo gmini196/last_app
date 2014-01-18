@@ -1,0 +1,10 @@
+<style="text-align: center" border="1">
+  
+   <%= f.fields_for :user_skill_details do |builder| %>
+      
+          <%= builder.check_box :skill_detail_id, {checked: false},
+          builder.object.skill_detail.id, nil %>
+        
+          <%= builder.object.skill_detail.detail_name %>
+        
+    <% end %>

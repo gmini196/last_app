@@ -1,0 +1,42 @@
+
+<div id="form_skill" class="row">
+<h1 class="offset1 pull-left">Add User</h1>
+  <div class="span6 offset1">
+    <%= form_for @user do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Password Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.label :skill %>
+      <ul class="unstyle">
+        <%= f.fields_for :user_skills do |builder| %>
+          <li>
+            <%= link_to new_user_path(skill: builder.object.skill.name),
+            remote: true do%>
+              <%= builder.object.skill.name %>
+            <% end %>
+            <%= builder.check_box :skill_id, {checked: false},
+            builder.object.skill.id, nil %>
+              <div id="skill_detail_<%=builder.object.skill.id%>">
+              <% if builder.object.user_skill_details.any? %>
+                <%=render "skill_detail_form", f: builder%>
+              <% end %>
+              </div>
+          </li>
+        <% end %>
+      </ul>
+      <br/>
+      <%= f.submit "Add User",class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<%= render "script" %>

@@ -1,0 +1,20 @@
+<h1>All Skills</h1>
+<ul class="user">
+  <% @user_skills.each do |user_skill| %>
+  <li>
+    <div class="user-info">
+      <h3>
+        <%# binding.pry %>
+        <%= user_skill.skill.name if user_skill.skill.present? %>
+      </h3>
+    </div>
+  </li>
+  <li>
+    <ul>
+      <% user_skill.user_skill_details.each do |detail| %>
+        <li><%= detail.skill_detail.detail_name if detail.skill_detail.present? %></li>
+      <% end %>
+    </ul>
+  </li>
+  <% end %>
+</ul>

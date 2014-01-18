@@ -1,0 +1,31 @@
+<script type="text/javascript">
+$(document).ready(function(){
+  $("ul > li > input[type=checkbox]").click(function(){
+    skill_id = $(this).val();
+    var skill_detail = $(this).parent().find("#skill_detail_"+skill_id);
+    if($(this).is(':checked')){
+      var request = $.ajax({
+        url: "new",
+        type: "GET",
+        data: {
+          name: $("#user_name").val(),
+          email: $("#user_email").val(),
+          password: $("#user_password").val(),
+          password_confirmation: $("#user_password_confirmation").val(),
+          skill: skill_id
+        },
+        dateType: "html",
+      });
+      request.done(function(data){
+        skill_detail.html($(data).find("#skill_detail_"+skill_id).html());
+      });
+      request.fail(function(jqXHR, textStatus){
+        form_skill.html("Connected: " + textStatus);
+      });
+    }
+    else{
+      skill_detail.html("");
+    }
+  })
+})
+</script>
